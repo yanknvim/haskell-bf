@@ -10,7 +10,7 @@ import Text.Parsec
 run :: String -> IO ()
 run str = do
 	case parse parseCode "" str of
-		Right tokens -> execStateT (mapM_ eval tokens) (repeat 0, 0, repeat 0) >> putStrLn ""
+		Right tokens -> execStateT (mapM_ eval tokens) (repeat 0, 0, repeat 0) *> return ()
 		Left err -> print err
 
 main :: IO ()
