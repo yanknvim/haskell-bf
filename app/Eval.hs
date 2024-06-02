@@ -1,6 +1,7 @@
 module Eval where
 
 import Parse
+
 import Control.Monad.State
 import Data.Char
 
@@ -20,7 +21,7 @@ eval Input = do
 	c <- liftIO getChar
 	modify $ \(left, _, right) -> (left, ord c, right)
 eval (Loop code) = do
-	(left, x, right) <- get
+	(_, x, _) <- get
 	if x == 0
 		then return ()
 		else mapM_ eval code >> eval (Loop code)
